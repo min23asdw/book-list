@@ -1,5 +1,3 @@
-// store/tagSlice.ts
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 interface Tag {
@@ -22,10 +20,8 @@ const initialState: TagState = {
   error: null,
 };
 
-// Basic Auth credentials encoded in Base64
-const authHeader = 'Basic dGVzdGVyOnRlc3Rlcg==';  // Replace with your actual Base64 encoded credentials
+const authHeader = process.env.NEXT_PUBLIC_DB_KEY || '';
 
-// Thunk to fetch data from API
 export const fetchTags = createAsyncThunk('tags/fetchTags', async () => {
   const response = await fetch('https://pantip.com/api/forum-service/home/get_tag_hit?limit=10', {
     headers: {
@@ -52,7 +48,7 @@ const tagSlice = createSlice({
       })
       .addCase(fetchTags.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.tags = action.payload; // action.payload should be the array of tags
+        state.tags = action.payload;
       })
       .addCase(fetchTags.rejected, (state, action) => {
         state.status = 'failed';

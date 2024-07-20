@@ -8,6 +8,9 @@ import { addBook, removeBook } from "./store/slice/booksSlice";
 import { decrement, increment } from "./store/slice/counterSlice";
 import { useEffect, useState } from "react";
 import TagList from "./components/TagList";
+import HighlightList from "./components/HighlightList";
+import RoomList from "./components/RoomList";
+import Sidebar from "./components/Sidebar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -25,9 +28,9 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>
-        <h1>Counter: {counter.value}</h1>
+    <main>
+      <div className="flex min-h-screen flex-col">
+        {/* <h1>Counter: {counter.value}</h1>
         <button onClick={() => dispatch(increment())}>Increment</button>
         <button onClick={() => dispatch(decrement())}>Decrement</button>
 
@@ -40,8 +43,13 @@ export default function Home() {
               <button onClick={() => handleRemoveBook(book.id)}>Remove</button>
             </li>
           ))}
-        </ul>
-        <TagList />
+        </ul> */}
+        <RoomList />
+        <div className="  items-center justify-between p-2 xl:p-12">
+          <TagList />
+          <HighlightList />
+          <Sidebar />
+        </div>
       </div>
     </main>
   );
